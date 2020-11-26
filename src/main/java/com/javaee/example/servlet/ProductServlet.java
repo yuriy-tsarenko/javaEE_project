@@ -64,4 +64,11 @@ public class ProductServlet extends HttpServlet {
         dataSource.createProduct(name, description, price, amount);
         response.setStatus(HttpServletResponse.SC_OK);
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) {
+        Long id = Long.valueOf(request.getParameter("id"));
+        DataSource dataSource = new DataSource();
+        dataSource.deleteOneProduct(id);
+    }
 }

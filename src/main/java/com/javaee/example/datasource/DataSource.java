@@ -68,6 +68,19 @@ public class DataSource {
         return list;
     }
 
+    public void deleteOneProduct(Long id) {
+        OrientDB orient = new OrientDB("remote:localhost", OrientDBConfig.defaultConfig());
+        ODatabaseSession db = orient.open("orient_db", "admin", "admin");
+        OClass product = db.getClass("Product");
+        if (product == null) {
+            createSchema();
+        }
+        String query = "DELETE VERTEX Product WHERE id=" + "'" + id + "'";
+        db.command(query);
+        db.close();
+        orient.close();
+    }
+
     private Product mapOResultToProduct(OResult item) {
         Product fromDb = new Product();
         fromDb.setId((Long) item.getProperty("id"));

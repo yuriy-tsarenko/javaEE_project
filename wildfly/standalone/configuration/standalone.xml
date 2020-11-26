@@ -527,4 +527,9 @@
             <remote-destination host="${jboss.mail.server.host:localhost}" port="${jboss.mail.server.port:25}"/>
         </outbound-socket-binding>
     </socket-binding-group>
+    <deployments>
+        <deployment name="simple_javaEE_project-1.0-SNAPSHOT.war" runtime-name="simple_javaEE_project-1.0-SNAPSHOT.war">
+            <fs-archive path="E:\IT\IdeaProjects\simple_javaEE_project\target\simple_javaEE_project-1.0-SNAPSHOT.war"/>
+        </deployment>
+    </deployments>
 </server>
