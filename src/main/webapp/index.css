@@ -1,0 +1,26 @@
+body {
+    background-color: #25303b;
+    text-align: justify;
+    font-family: Arial sans-serif;
+    font-style: normal;
+    color: aliceblue;
+}
+
+.information {
+    position: relative;
+    margin: 10vh auto;
+    width: 60vw;
+}
+
+.informationTable {
+    position: relative;
+    padding: 1vw;
+    margin: 0 auto;
+    width: 50vw;
+    background-color: #aaaaaa;
+    color: #25303b;
+    border-collapse: collapse;
+    border-color: #383838;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    text-align: left;
+}
