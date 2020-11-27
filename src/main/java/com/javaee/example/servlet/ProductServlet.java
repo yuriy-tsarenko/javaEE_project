@@ -4,12 +4,12 @@ import com.google.gson.Gson;
 import com.javaee.example.datasource.DataSource;
 import com.javaee.example.dto.Product;
 
+import com.javaee.example.util.CustomResponseBody;
 import lombok.Getter;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +64,18 @@ public class ProductServlet extends HttpServlet {
         BigDecimal price = BigDecimal.valueOf(priceLong);
 
         dataSource.createProduct(name, description, price, amount);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
+        try {
+            response.getWriter().write(new Gson().toJson(new CustomResponseBody("POST","success")));
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -92,7 +103,17 @@ public class ProductServlet extends HttpServlet {
         BigDecimal price = BigDecimal.valueOf(priceLong);
 
         dataSource.updateExitingProduct(id, name, description, price, amount);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
+        try {
+            response.getWriter().write(new Gson().toJson(new CustomResponseBody("PUT","success")));
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -100,5 +121,16 @@ public class ProductServlet extends HttpServlet {
         Long id = Long.valueOf(request.getParameter("id"));
         DataSource dataSource = new DataSource();
         dataSource.deleteOneProduct(id);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.setStatus(HttpServletResponse.SC_OK);
+        try {
+            response.getWriter().write(new Gson().toJson(new CustomResponseBody("DELETE","success")));
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
