@@ -59,8 +59,8 @@ public class ProductServlet extends HttpServlet {
         }
         String name = (String) jsonObject.get("name");
         String description = (String) jsonObject.get("description");
-        Long priceLong = (Long) jsonObject.get("price");
-        Long amount = (Long) jsonObject.get("amount");
+        Double priceLong = Double.valueOf((String) jsonObject.get("price"));
+        Long amount = Long.valueOf((String) jsonObject.get("amount"));
         BigDecimal price = BigDecimal.valueOf(priceLong);
 
         dataSource.createProduct(name, description, price, amount);
@@ -98,8 +98,8 @@ public class ProductServlet extends HttpServlet {
         Long id = (Long) jsonObject.get("id");
         String name = (String) jsonObject.get("name");
         String description = (String) jsonObject.get("description");
-        Long priceLong = (Long) jsonObject.get("price");
-        Long amount = (Long) jsonObject.get("amount");
+        Double priceLong = Double.valueOf((String) jsonObject.get("price"));
+        Long amount = Long.valueOf((String) jsonObject.get("amount"));
         BigDecimal price = BigDecimal.valueOf(priceLong);
 
         dataSource.updateExitingProduct(id, name, description, price, amount);
