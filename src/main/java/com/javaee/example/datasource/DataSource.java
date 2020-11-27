@@ -24,6 +24,10 @@ public class DataSource {
         if (product.getProperty("id") == null) {
             product.createProperty("id", OType.LONG);
             product.createIndex("product_id", OClass.INDEX_TYPE.UNIQUE, "id");
+            product.createProperty("name", OType.STRING);
+            product.createProperty("description", OType.STRING);
+            product.createProperty("price", OType.DECIMAL);
+            product.createProperty("amount", OType.LONG);
         }
         db.close();
         orient.close();
@@ -38,12 +42,13 @@ public class DataSource {
         if (product == null) {
             createSchema();
         }
+
         OVertex result = db.newVertex("Product");
-        result.setProperty("id", generatedId);
-        result.setProperty("name", name);
-        result.setProperty("description", description);
-        result.setProperty("price", price);
-        result.setProperty("amount", amount);
+        result.setProperty("id", generatedId, OType.LONG);
+        result.setProperty("name", name, OType.STRING);
+        result.setProperty("description", description, OType.STRING);
+        result.setProperty("price", price, OType.DECIMAL);
+        result.setProperty("amount", amount, OType.LONG);
         result.save();
         db.close();
         orient.close();
@@ -58,7 +63,7 @@ public class DataSource {
             createSchema();
         }
         String query = "SELECT FROM Product";
-        OResultSet rs = db.query(query);
+        OResultSet rs = db.command(query);
         while (rs.hasNext()) {
             list.add(mapOResultToProduct(rs.next()));
         }
@@ -75,7 +80,22 @@ public class DataSource {
         if (product == null) {
             createSchema();
         }
-        String query = "DELETE VERTEX Product WHERE id=" + "'" + id + "'";
+        String query = "DELETE VERTEX Product WHERE id=" + id;
+        db.command(query);
+        db.close();
+        orient.close();
+    }
+
+    public void updateExitingProduct(Long id, String name, String description,
+                                     BigDecimal price, Long amount) {
+        OrientDB orient = new OrientDB("remote:localhost", OrientDBConfig.defaultConfig());
+        ODatabaseSession db = orient.open("orient_db", "admin", "admin");
+        OClass product = db.getClass("Product");
+        if (product == null) {
+            createSchema();
+        }
+        String query = "UPDATE Product SET name ='" + name + "',description ='" + description + "'"
+                + ",price=" + price + ",amount=" + amount + " WHERE id=" + id;
         db.command(query);
         db.close();
         orient.close();
@@ -83,11 +103,11 @@ public class DataSource {
 
     private Product mapOResultToProduct(OResult item) {
         Product fromDb = new Product();
-        fromDb.setId((Long) item.getProperty("id"));
-        fromDb.setName((String) item.getProperty("name"));
-        fromDb.setDescription((String) item.getProperty("description"));
-        fromDb.setPrice((BigDecimal) item.getProperty("price"));
-        fromDb.setAmount((Long) item.getProperty("amount"));
+        fromDb.setId(item.getProperty("id"));
+        fromDb.setName(item.getProperty("name"));
+        fromDb.setDescription(item.getProperty("description"));
+        fromDb.setPrice(item.getProperty("price"));
+        fromDb.setAmount(item.getProperty("amount"));
         return fromDb;
     }
 
