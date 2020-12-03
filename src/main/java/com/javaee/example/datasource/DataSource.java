@@ -2,8 +2,6 @@ package com.javaee.example.datasource;
 
 import com.javaee.example.dto.Product;
 import com.orientechnologies.orient.core.db.ODatabaseSession;
-import com.orientechnologies.orient.core.db.OrientDB;
-import com.orientechnologies.orient.core.db.OrientDBConfig;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OType;
 import com.orientechnologies.orient.core.record.OVertex;
@@ -14,12 +12,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataSource {
+public class DataSource extends Session {
 
     public void createSchema() {
-        OrientDB orient = new OrientDB("remote:localhost", OrientDBConfig.defaultConfig());
-        ODatabaseSession db = orient.open("orient_db", "admin", "admin");
-        OClass product = db.createVertexClass("Product");
+        ODatabaseSession session = openSession();
+        OClass product = session.createVertexClass("Product");
 
         if (product.getProperty("id") == null) {
             product.createProperty("id", OType.LONG);
@@ -29,76 +26,67 @@ public class DataSource {
             product.createProperty("price", OType.DECIMAL);
             product.createProperty("amount", OType.LONG);
         }
-        db.close();
-        orient.close();
+        closeSession();
     }
 
     public void createProduct(String name, String description,
                               BigDecimal price, Long amount) {
         Long generatedId = generateId();
-        OrientDB orient = new OrientDB("remote:localhost", OrientDBConfig.defaultConfig());
-        ODatabaseSession db = orient.open("orient_db", "admin", "admin");
-        OClass product = db.getClass("Product");
+        ODatabaseSession session = openSession();
+        OClass product = session.getClass("Product");
         if (product == null) {
             createSchema();
         }
 
-        OVertex result = db.newVertex("Product");
+        OVertex result = session.newVertex("Product");
         result.setProperty("id", generatedId, OType.LONG);
         result.setProperty("name", name, OType.STRING);
         result.setProperty("description", description, OType.STRING);
         result.setProperty("price", price, OType.DECIMAL);
         result.setProperty("amount", amount, OType.LONG);
         result.save();
-        db.close();
-        orient.close();
+        closeSession();
     }
 
     public List<Product> findAllProducts() {
         List<Product> list = new ArrayList<>();
-        OrientDB orient = new OrientDB("remote:localhost", OrientDBConfig.defaultConfig());
-        ODatabaseSession db = orient.open("orient_db", "admin", "admin");
-        OClass product = db.getClass("Product");
+        ODatabaseSession session = openSession();
+        OClass product = session.getClass("Product");
         if (product == null) {
             createSchema();
         }
         String query = "SELECT FROM Product";
-        OResultSet rs = db.command(query);
+        OResultSet rs = session.command(query);
         while (rs.hasNext()) {
             list.add(mapOResultToProduct(rs.next()));
         }
         rs.close();
-        db.close();
-        orient.close();
+        closeSession();
         return list;
     }
 
     public void deleteOneProduct(Long id) {
-        OrientDB orient = new OrientDB("remote:localhost", OrientDBConfig.defaultConfig());
-        ODatabaseSession db = orient.open("orient_db", "admin", "admin");
-        OClass product = db.getClass("Product");
+        ODatabaseSession session = openSession();
+        OClass product = session.getClass("Product");
         if (product == null) {
             createSchema();
         }
         String query = "DELETE VERTEX Product WHERE id=" + id;
-        db.command(query);
-        db.close();
-        orient.close();
+        session.command(query);
+        closeSession();
     }
 
     public void updateExitingProduct(Long id, String name, String description,
                                      BigDecimal price, Long amount) {
-        OrientDB orient = new OrientDB("remote:localhost", OrientDBConfig.defaultConfig());
-        ODatabaseSession db = orient.open("orient_db", "admin", "admin");
-        OClass product = db.getClass("Product");
+        ODatabaseSession session = openSession();
+        OClass product = session.getClass("Product");
         if (product == null) {
             createSchema();
         }
         String query = "UPDATE Product SET name ='" + name + "',description ='" + description + "'"
                 + ",price=" + price + ",amount=" + amount + " WHERE id=" + id;
-        db.command(query);
-        db.close();
-        orient.close();
+        session.command(query);
+        closeSession();
     }
 
     private Product mapOResultToProduct(OResult item) {

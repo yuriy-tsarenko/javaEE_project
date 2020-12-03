@@ -23,9 +23,10 @@ import java.util.List;
 @Getter
 public class ProductServlet extends HttpServlet {
 
+    private DataSource dataSource = new DataSource();
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        DataSource dataSource = new DataSource();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
@@ -42,7 +43,6 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        DataSource dataSource = new DataSource();
         StringBuilder builder = new StringBuilder();
         JSONObject jsonObject = new JSONObject();
         String inputLine = null;
@@ -69,7 +69,7 @@ public class ProductServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
         try {
-            response.getWriter().write(new Gson().toJson(new CustomResponseBody("POST","success")));
+            response.getWriter().write(new Gson().toJson(new CustomResponseBody("POST", "success")));
             response.getWriter().flush();
             response.getWriter().close();
         } catch (IOException e) {
@@ -80,7 +80,6 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) {
-        DataSource dataSource = new DataSource();
         StringBuilder builder = new StringBuilder();
         JSONObject jsonObject = new JSONObject();
         String inputLine = null;
@@ -108,7 +107,7 @@ public class ProductServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
         try {
-            response.getWriter().write(new Gson().toJson(new CustomResponseBody("PUT","success")));
+            response.getWriter().write(new Gson().toJson(new CustomResponseBody("PUT", "success")));
             response.getWriter().flush();
             response.getWriter().close();
         } catch (IOException e) {
@@ -126,7 +125,7 @@ public class ProductServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
         try {
-            response.getWriter().write(new Gson().toJson(new CustomResponseBody("DELETE","success")));
+            response.getWriter().write(new Gson().toJson(new CustomResponseBody("DELETE", "success")));
             response.getWriter().flush();
             response.getWriter().close();
         } catch (IOException e) {
