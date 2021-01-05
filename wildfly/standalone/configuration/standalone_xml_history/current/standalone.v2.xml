@@ -529,7 +529,7 @@
     </socket-binding-group>
     <deployments>
         <deployment name="simple_javaEE_project-1.0-SNAPSHOT.war" runtime-name="simple_javaEE_project-1.0-SNAPSHOT.war" enabled="false">
-            <fs-archive path="E:\IT\IdeaProjects\simple_javaEE_project\target\simple_javaEE_project-1.0-SNAPSHOT.war"/>
+            <fs-archive path="D:\IT\IdeaProjects\simple_javaEE_project\target\simple_javaEE_project-1.0-SNAPSHOT.war"/>
         </deployment>
     </deployments>
 </server>
