@@ -4,16 +4,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <servlet>
-        <servlet-name>ProductServlet</servlet-name>
-        <servlet-class>com.javaee.example.servlet.ProductServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ProductServlet</servlet-name>
-        <url-pattern>/product</url-pattern>
-    </servlet-mapping>
+    <display-name>Java EE</display-name>
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

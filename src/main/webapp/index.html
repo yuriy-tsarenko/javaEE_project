@@ -25,6 +25,41 @@
             <td>/product</td>
             <td>save one product to db, JSON body, fields: name, description, price, amount</td>
         </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                {<br>
+                "name": "Car",<br>
+                "description": "BMW",<br>
+                "price": "8998219.56",<br>
+                "amount": "12"<br>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>PUT</td>
+            <td>/product</td>
+            <td>update exiting product from db by id, JSON body, fields:id, name, description, price, amount</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                {<br>
+                "id": 5,<br>
+                "name": "Car",<br>
+                "description": "OPEL",<br>
+                "price": "899821989",<br>
+                "amount": "11"<br>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>/product</td>
+            <td>delete one product from db by id, Path param, fields: id. EX: /product?id=2</td>
+        </tr>
     </table>
 </div>
 </body>
