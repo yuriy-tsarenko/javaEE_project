@@ -1,17 +1,17 @@
-package com.javaee.example.datasource.implementation;
+package com.javaee.example.datasource.db_connector.implementation;
 
-import com.javaee.example.datasource.DbSchema;
-import com.javaee.example.datasource.OrientDbConnector;
-import com.javaee.example.query_builder.QueryBuilder;
+import com.javaee.example.datasource.db_connector.DbSchema;
+import com.javaee.example.datasource.db_connector.OrientDbConnector;
+import com.javaee.example.datasource.query_builder.QueryBuilder;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.sql.SQLException;
 
-import static com.javaee.example.query_builder.Keywords.EXTENDS;
-import static com.javaee.example.query_builder.Keywords.IF_NOT_EXISTS;
-import static com.javaee.example.query_builder.Keywords.SPACE;
-import static com.javaee.example.query_builder.Keywords.V_CLASS;
+import static com.javaee.example.datasource.query_builder.Keywords.EXTENDS;
+import static com.javaee.example.datasource.query_builder.Keywords.IF_NOT_EXISTS;
+import static com.javaee.example.datasource.query_builder.Keywords.SPACE;
+import static com.javaee.example.datasource.query_builder.Keywords.V_CLASS;
 import static com.javaee.example.util.Constants.CUSTOMER_CLASS;
 import static com.javaee.example.util.Constants.PRODUCT_CLASS;
 

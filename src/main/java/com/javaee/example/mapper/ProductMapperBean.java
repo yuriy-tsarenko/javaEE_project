@@ -26,4 +26,15 @@ public class ProductMapperBean implements ProductMapper {
                 })
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Product mapDtoToEntity(ProductDto dto) {
+        Product product = new Product();
+        product.setRid(dto.getRid());
+        product.setName(dto.getName());
+        product.setAmount(dto.getAmount());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        return product;
+    }
 }

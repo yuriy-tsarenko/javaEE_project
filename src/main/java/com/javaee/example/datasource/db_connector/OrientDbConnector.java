@@ -1,4 +1,4 @@
-package com.javaee.example.datasource;
+package com.javaee.example.datasource.db_connector;
 
 import java.sql.SQLException;
 import java.util.List;

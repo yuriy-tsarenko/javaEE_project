@@ -1,4 +1,6 @@
-package com.javaee.example.query_builder;
+package com.javaee.example.datasource.query_builder.implementation;
+
+import com.javaee.example.datasource.query_builder.QueryBuilder;
 
 import javax.ejb.Stateless;
 
