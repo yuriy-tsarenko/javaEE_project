@@ -1,6 +1,6 @@
 package com.javaee.example.servlet;
 
-import com.javaee.example.datasource.DbSchema;
+import com.javaee.example.datasource.db_connector.DbSchema;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

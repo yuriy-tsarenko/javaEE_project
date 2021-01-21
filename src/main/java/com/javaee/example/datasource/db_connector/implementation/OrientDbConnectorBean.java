@@ -1,7 +1,7 @@
-package com.javaee.example.datasource.implementation;
+package com.javaee.example.datasource.db_connector.implementation;
 
-import com.javaee.example.datasource.ClassBuilder;
-import com.javaee.example.datasource.OrientDbConnector;
+import com.javaee.example.datasource.db_connector.ClassBuilder;
+import com.javaee.example.datasource.db_connector.OrientDbConnector;
 import com.orientechnologies.orient.jdbc.OrientJdbcConnection;
 
 import javax.ejb.Stateless;

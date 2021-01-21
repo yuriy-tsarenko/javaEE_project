@@ -1,4 +1,4 @@
-package com.javaee.example.query_builder;
+package com.javaee.example.datasource.query_builder;
 
 public interface Keywords {
 

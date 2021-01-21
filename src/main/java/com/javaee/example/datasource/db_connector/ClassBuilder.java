@@ -1,4 +1,4 @@
-package com.javaee.example.datasource;
+package com.javaee.example.datasource.db_connector;
 
 import java.util.Map;
 
@@ -11,5 +11,16 @@ import java.util.Map;
  */
 public interface ClassBuilder<T> {
 
+    /**
+     * @param fields - content for expected object
+     * @return T
+     */
     T build(Map<String, Object> fields);
+
+    /**
+     * This method makes a map of class fields, improves field validation process etc.
+     *
+     * @return Map
+     */
+    Map<String, Object> getFieldMap();
 }
